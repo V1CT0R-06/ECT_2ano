@@ -115,6 +115,7 @@ static Image AllocateImageHeader(uint32 width, uint32 height) {
 
   newHeader->width = width;
   newHeader->height = height;
+  // Guardamos logo as dimensões aqui
 
   // Allocating the array of pointers to image rows
   newHeader->image = malloc(height * sizeof(uint16*));
@@ -137,6 +138,7 @@ static Image AllocateImageHeader(uint32 width, uint32 height) {
 // Allocate row of background (label=0) pixels
 static uint16* AllocateRowArray(uint32 size) {
   uint16* newArray = calloc((size_t)size, sizeof(uint16));
+  // Uso calloc para os pixeis saírem já como 0
   // Error handling
   check(newArray != NULL, "AllocateRowArray");
 
@@ -183,6 +185,7 @@ Image ImageCreate(uint32 width, uint32 height) {
 
   // Just two possible pixel colors
   Image img = AllocateImageHeader(width, height);
+  // Neste ponto faltam as linhas
 
   // Creating the image rows
   for (uint32 i = 0; i < height; i++) {
@@ -210,6 +213,7 @@ Image ImageCreateChess(uint32 width, uint32 height, uint32 edge, rgb_t color) {
 
   // Alloc color in LUT.
   uint8 label = LUTAllocColor(img, color);
+  // Este label novo fica a alternar com o 0
 
   // Assigning the color to each image pixel
 
@@ -240,6 +244,7 @@ Image ImageCreatePalete(uint32 width, uint32 height, uint32 edge) {
     color = GenerateNextColor(color);
     img->LUT[img->num_colors++] = color;
   }
+  // Assim qualquer "tile" que peça tem logo cor diferente
 
   // number of tiles
   uint32 wtiles = width / edge;
@@ -265,6 +270,10 @@ void ImageDestroy(Image* imgp) {
   assert(imgp != NULL);
 
   Image img = *imgp;
+  if (img == NULL) {
+    *imgp = NULL;
+    return;
+  }
 
   for (uint32 i = 0; i < img->height; i++) {
     free(img->image[i]);
@@ -314,6 +323,7 @@ void ImageRAWPrint(const Image img) {
   printf("width = %d height = %d\n", (int)img->width, (int)img->height);
   printf("num_colors = %d\n", (int)img->num_colors);
   printf("RAW image\n");
+  // Para ver rapidamente o conteúdo sem abrir um "image viewer"
 
   // Print the pixel labels of each image row
   for (uint32 i = 0; i < img->height; i++) {
@@ -412,6 +422,7 @@ Image ImageLoadPBM(const char* filename) {  ///
     check(fread(bytes, sizeof(uint8), nbytes, f) == (size_t)nbytes,
           "Reading pixels");
     unpackBits(nbytes, bytes, raw_row);
+    // A PBM vem toda em bits, por isso converto para labels 0/1
     img->image[i] = AllocateRowArray((uint32)w);
     for (uint32 j = 0; j < (uint32)w; j++) {
       img->image[i][j] = (uint16)raw_row[j];
@@ -499,7 +510,6 @@ Image ImageLoadPPM(const char* filename) {
       // printf("[%u][%u]: (%d,%d,%d) -> %u (%6x)\n", i, j, r,g,b, index,
       // color);
     }
-    fprintf(f, "\n");
   }
 
   fclose(f);
@@ -585,6 +595,7 @@ int ImageIsEqual(const Image img1, const Image img2) {
 
       rgb_t color1 = img1->LUT[label1];
       rgb_t color2 = img2->LUT[label2];
+      // O mesmo RGB pode ter labels diferentes
 
       // Comparação de cores reais
       if (color1 != color2) {
@@ -642,6 +653,7 @@ Image ImageRotate90CW(const Image img) {
 
       uint32 new_r = c;
       uint32 new_c = H - 1 - r;
+      // Na prática é só trocar linha por coluna e espelhar
 
       rotated->image[new_r][new_c] = label;
       PIXMEM++;  // escrita
@@ -687,6 +699,7 @@ Image ImageRotate180CW(const Image img) {
 
       uint32 new_r = H - 1 - r;
       uint32 new_c = W - 1 - c;
+      // Inverter os dois eixos
 
       rotated->image[new_r][new_c] = label;
       PIXMEM++;  // escrita
@@ -722,6 +735,9 @@ int ImageIsValidPixel(const Image img, int u, int v) {
 /// Each function carries out a different version of the algorithm.
 
 /// Region growing using the recursive flood-filling algorithm.
+static int FloodFillRecursiveAux(Image img, int u, int v, uint16 old_label,
+                                 uint16 new_label);
+
 int ImageRegionFillingRecursive(Image img, int u, int v, uint16 label) {
   assert(img != NULL);
   assert(ImageIsValidPixel(img, u, v));
@@ -765,6 +781,7 @@ int ImageRegionFillingWithSTACK(Image img, int u, int v, uint16 label) {
   size_t max = (size_t)W * (size_t)H;
   Coord* stack = malloc(max * sizeof(Coord));
   check(stack != NULL, "Alloc stack");
+  // Stack manual para não rebentar com a profundidade da recursão
 
   int count = 0;
   size_t top = 0;
@@ -831,6 +848,7 @@ int ImageRegionFillingWithQUEUE(Image img, int u, int v, uint16 label) {
   size_t tail = 0;
   size_t size = 0;
   int count = 0;
+  // Implemento uma fila circular simples com os índices head/tail
 
   // Marca seed imediatamente
   img->image[v][u] = label;
@@ -887,6 +905,7 @@ static int FloodFillRecursiveAux(Image img, int u, int v,
 
   img->image[v][u] = new_label;
   PIXMEM++;  // escrita de pixel
+  // "Pinto" já o pixel para não voltar a passar por ele
 
   int count = 1;
 
@@ -916,7 +935,7 @@ int ImageSegmentation(Image img, FillingFunction fillFunct) {
     for (uint32 u = 0; u < img->width; u++) {
       PIXMEM++;  // leitura
       if (img->image[v][u] == WHITE) {  // label 0 -> background
-        // Nova região
+        // Nova região "descoberta"
         color = GenerateNextColor(color);
         uint16 new_label = (uint16)LUTAllocColor(img, color);
 
