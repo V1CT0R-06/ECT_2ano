@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhereC | Account</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <p class="brand-label">WhereC?</p>
+        <p class="brand-subtitle">Account access</p>
+      </div>
+      <div class="topbar-actions">
+        <a class="ghost" href="index.html">Return to Map</a>
+        <a id="adminLink" class="ghost" href="admin.html">Admin Dashboard</a>
+        <label class="theme-toggle" aria-label="Toggle dark mode">
+          <input type="checkbox" id="themeToggle" />
+          <span class="theme-track"></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="map-panel">
+        <div class="panel-section">
+          <h2>Sign in</h2>
+          <form id="loginForm" class="form">
+            <label>
+              Email
+              <input type="email" id="loginEmail" required placeholder="you@example.com" />
+            </label>
+            <label>
+              Password
+              <input type="password" id="loginPassword" required placeholder="********" />
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="primary">Sign in</button>
+              <div class="status-right">
+                <p id="accountStatus" class="form-message" role="status">Not signed in.</p>
+                <button id="logoutButton" type="button" class="ghost hidden">Sign out</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="side-panel">
+        <div class="panel-section">
+          <h2>Create account</h2>
+          <form id="registerForm" class="form">
+            <label>
+              New email
+              <input type="email" id="registerEmail" required placeholder="new@example.com" />
+            </label>
+            <label>
+              New password
+              <input type="password" id="registerPassword" required placeholder="Create a password" />
+            </label>
+            <button type="submit" class="ghost">Create account</button>
+          </form>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

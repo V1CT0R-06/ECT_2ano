@@ -1,0 +1,7 @@
+INTC;London;34.25;34.45;1792860
+linha_invalida
+TSLA;London;221.33;229.63;398520
+
+EA;Paris;72.63;68.98;1189510
+AMZN;Paris;abc;129.50;510000
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhereC | Bathroom Maps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <p class="brand-label">WhereC?</p>
+        <p class="brand-subtitle">Bathrooms mapped for Portugal.</p>
+      </div>
+      <div class="topbar-actions">
+        <label class="theme-toggle" aria-label="Toggle dark mode">
+          <input type="checkbox" id="themeToggle" />
+          <span class="theme-track"></span>
+        </label>
+        <div class="hero-metric">
+          <p class="label">Live spots</p>
+          <p class="value" id="bathroomCount">0</p>
+        </div>
+        <div class="hero-metric">
+          <p class="label">Avg rating</p>
+          <p class="value" id="averageRating">0.0</p>
+        </div>
+        <a id="adminLink" class="ghost hidden" href="admin.html" hidden>Admin Dashboard</a>
+      </div>
+    </header>
+    <main class="layout">
+      <section class="map-panel">
+        <div id="map" class="map"></div>
+        <div class="map-hint">Tap the map to drop a new bathroom pin.</div>
+
+        <div class="panel-section">
+          <h2>Request a bathroom</h2>
+          <form id="bathroomForm" class="form">
+            <label>
+              Name
+              <input type="text" name="name" required maxlength="80" placeholder="Central Library" />
+            </label>
+            <label>
+              Description
+              <textarea name="description" maxlength="240" placeholder="Clean, accessible, gender-neutral."></textarea>
+            </label>
+            <div class="form-row">
+              <label>
+                Latitude
+                <input type="number" name="lat" step="0.0001" min="-90" max="90" required />
+              </label>
+              <label>
+                Longitude
+                <input type="number" name="lng" step="0.0001" min="-180" max="180" required />
+              </label>
+            </div>
+            <button type="button" id="useLocation" class="ghost">Use my location</button>
+            <button type="submit" class="primary">Send request</button>
+            <p id="formMessage" class="form-message" role="status"></p>
+          </form>
+          <p id="authHint" class="muted">Sign in on the account page to request bathrooms.</p>
+          <a class="ghost" href="auth.html">Sign in / Create account</a>
+        </div>
+      </section>
+
+      <section class="side-panel">
+        <div class="panel-section">
+          <h2>Bathrooms</h2>
+          <p class="muted">Browse verified locations and ratings.</p>
+          <div id="bathroomList" class="list"></div>
+        </div>
+
+        <div class="panel-section" id="detailPanel">
+          <h2>Bathroom details</h2>
+          <p class="muted">Select a marker or list item to see ratings.</p>
+          <div id="detailContent" class="detail"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

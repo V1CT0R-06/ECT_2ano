@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhereC | Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <p class="brand-label">WhereC?</p>
+        <p class="brand-subtitle">Admin dashboard</p>
+      </div>
+      <div class="topbar-actions">
+        <a class="ghost" href="index.html">Return to Map</a>
+        <label class="theme-toggle" aria-label="Toggle dark mode">
+          <input type="checkbox" id="themeToggle" />
+          <span class="theme-track"></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="map-panel">
+        <div class="panel-section">
+          <h2>Admin sign in</h2>
+          <form id="adminLoginForm" class="form">
+            <label>
+              Email
+              <input type="email" id="adminEmail" required placeholder="admin@example.com" />
+            </label>
+            <label>
+              Password
+              <input type="password" id="adminPassword" required placeholder="********" />
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="primary">Sign in</button>
+              <div class="status-right">
+                <p id="adminStatus" class="form-message" role="status">Not signed in.</p>
+                <button id="adminLogout" type="button" class="ghost hidden">Sign out</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel-section hidden" id="reviewEditor">
+          <h2>Edit review</h2>
+          <form id="reviewEditForm" class="form">
+            <label>
+              Rating
+              <select id="reviewRating" required>
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Good</option>
+                <option value="3">3 - Okay</option>
+                <option value="2">2 - Needs work</option>
+                <option value="1">1 - Avoid</option>
+              </select>
+            </label>
+            <label>
+              Comment
+              <textarea id="reviewComment" maxlength="240" placeholder="Update review text"></textarea>
+            </label>
+            <div class="review-actions">
+              <button type="submit" class="primary">Save changes</button>
+              <button type="button" id="reviewCancel" class="ghost">Cancel</button>
+            </div>
+            <p id="reviewEditStatus" class="form-message" role="status"></p>
+          </form>
+        </div>
+
+        <div class="panel-section hidden" id="bathroomEditor">
+          <h2>Edit bathroom</h2>
+          <form id="bathroomEditForm" class="form">
+            <label>
+              Name
+              <input type="text" id="bathroomName" maxlength="80" placeholder="Bathroom name" />
+            </label>
+            <label>
+              Description
+              <textarea id="bathroomDescription" maxlength="240" placeholder="Update description"></textarea>
+            </label>
+            <div class="review-actions">
+              <button type="submit" class="primary">Save changes</button>
+              <button type="button" id="bathroomCancel" class="ghost">Cancel</button>
+            </div>
+            <p id="bathroomEditStatus" class="form-message" role="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="side-panel">
+        <div class="panel-section">
+          <h2>Pending requests</h2>
+          <p class="muted">Approve new bathrooms submitted by users.</p>
+          <div id="requestList" class="list"></div>
+        </div>
+
+        <div class="panel-section">
+          <h2>Bathrooms</h2>
+          <p class="muted">Remove bathrooms directly from the system.</p>
+          <div id="bathroomList" class="list"></div>
+        </div>
+
+        <div class="panel-section">
+          <h2>Reviews</h2>
+          <p class="muted">Edit or remove ratings across all bathrooms.</p>
+          <div id="reviewList" class="list"></div>
+        </div>
+
+        <div class="panel-section">
+          <h2>Users</h2>
+          <p class="muted">Reset passwords or remove accounts.</p>
+          <div id="userList" class="list"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

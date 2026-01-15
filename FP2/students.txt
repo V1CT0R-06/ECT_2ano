@@ -1,0 +1,6 @@
+Ana;Informatica;14.5
+Bruno;Matematica;9.8
+Carla;Informatica;16.2
+linha_invalida
+Diogo;Informatica;10.0
+Eva;Matematica;18.1

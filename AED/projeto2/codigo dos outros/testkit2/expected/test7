@@ -1,0 +1,184 @@
+==50184== Memcheck, a memory error detector
+==50184== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==50184== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==50184== Command: ./TestAllFunctions
+==50184== 
+
+*** simple_graph.DOT ***
+Vertex 0 - Adjacent vertices:
+Number of elements = 2
+{ 1, 2 }
+Vertex 1 - Adjacent vertices:
+Number of elements = 3
+{ 0, 2, 3 }
+Vertex 2 - Adjacent vertices:
+Number of elements = 3
+{ 0, 1, 4 }
+Vertex 3 - Adjacent vertices:
+Number of elements = 3
+{ 1, 4, 5 }
+Vertex 4 - Adjacent vertices:
+Number of elements = 3
+{ 2, 3, 5 }
+Vertex 5 - Adjacent vertices:
+Number of elements = 4
+{ 3, 4, 6, 7 }
+Vertex 6 - Adjacent vertices:
+Number of elements = 2
+{ 5, 7 }
+Vertex 7 - Adjacent vertices:
+Number of elements = 2
+{ 5, 6 }
+Vertex 0 - Weight: 2.000000
+Vertex 1 - Weight: 3.000000
+Vertex 2 - Weight: 3.000000
+Vertex 3 - Weight: 3.000000
+Vertex 4 - Weight: 3.000000
+Vertex 5 - Weight: 4.000000
+Vertex 6 - Weight: 2.000000
+Vertex 7 - Weight: 2.000000
+*** subgraph of simple_graph.DOT ***
+// Paste in: https://dreampuf.github.io/GraphvizOnline
+graph {
+  // Vertices =  5
+  // Edges =  5
+  // Max Degree = 3
+  2  2 -- 4
+  3  3 -- 4  3 -- 5
+  4  4 -- 5
+  5  5 -- 6
+  6
+}
+
+Testing sets for dominance
+Finding a MIN dominating set
+Number of elements = 2
+{ 0, 5 }
+Finding a MIN WEIGHT dominating set
+Number of elements = 2
+{ 0, 5 }
+
+*** simple_weighted_graph.DOT ***
+Vertex 2 - Adjacent vertices:
+Number of elements = 2
+{ 4, 6 }
+Vertex 4 - Adjacent vertices:
+Number of elements = 3
+{ 2, 6, 8 }
+Vertex 6 - Adjacent vertices:
+Number of elements = 3
+{ 2, 4, 10 }
+Vertex 8 - Adjacent vertices:
+Number of elements = 3
+{ 4, 10, 12 }
+Vertex 10 - Adjacent vertices:
+Number of elements = 3
+{ 6, 8, 12 }
+Vertex 12 - Adjacent vertices:
+Number of elements = 2
+{ 8, 10 }
+Vertex 0 - Weight: -1.000000
+Vertex 1 - Weight: -1.000000
+Vertex 2 - Weight: 6.000000
+Vertex 3 - Weight: -1.000000
+Vertex 4 - Weight: 5.000000
+Vertex 5 - Weight: -1.000000
+Vertex 6 - Weight: 10.000000
+Vertex 7 - Weight: -1.000000
+Vertex 8 - Weight: 10.000000
+Vertex 9 - Weight: -1.000000
+Vertex 10 - Weight: 7.000000
+Vertex 11 - Weight: -1.000000
+Vertex 12 - Weight: 6.000000
+Vertex 13 - Weight: -1.000000
+Vertex 14 - Weight: -1.000000
+Finding a MIN dominating set
+Number of elements = 2
+{ 2, 8 }
+Finding a MIN WEIGHT dominating set
+Number of elements = 2
+{ 4, 12 }
+
+*** SWtinyG.txt ***
+Vertex 0 - Adjacent vertices:
+Number of elements = 4
+{ 1, 2, 5, 6 }
+Vertex 1 - Adjacent vertices:
+Number of elements = 1
+{ 0 }
+Vertex 2 - Adjacent vertices:
+Number of elements = 1
+{ 0 }
+Vertex 3 - Adjacent vertices:
+Number of elements = 2
+{ 4, 5 }
+Vertex 4 - Adjacent vertices:
+Number of elements = 3
+{ 3, 5, 6 }
+Vertex 5 - Adjacent vertices:
+Number of elements = 3
+{ 0, 3, 4 }
+Vertex 6 - Adjacent vertices:
+Number of elements = 2
+{ 0, 4 }
+Vertex 7 - Adjacent vertices:
+Number of elements = 1
+{ 8 }
+Vertex 8 - Adjacent vertices:
+Number of elements = 1
+{ 7 }
+Vertex 9 - Adjacent vertices:
+Number of elements = 3
+{ 10, 11, 12 }
+Vertex 10 - Adjacent vertices:
+Number of elements = 1
+{ 9 }
+Vertex 11 - Adjacent vertices:
+Number of elements = 2
+{ 9, 12 }
+Vertex 12 - Adjacent vertices:
+Number of elements = 2
+{ 9, 11 }
+Vertex 0 - Weight: 4.000000
+Vertex 1 - Weight: 1.000000
+Vertex 2 - Weight: 1.000000
+Vertex 3 - Weight: 2.000000
+Vertex 4 - Weight: 3.000000
+Vertex 5 - Weight: 3.000000
+Vertex 6 - Weight: 2.000000
+Vertex 7 - Weight: 1.000000
+Vertex 8 - Weight: 1.000000
+Vertex 9 - Weight: 3.000000
+Vertex 10 - Weight: 1.000000
+Vertex 11 - Weight: 2.000000
+Vertex 12 - Weight: 2.000000
+*** subgraph of SWtinyG.txt ***
+// Paste in: https://dreampuf.github.io/GraphvizOnline
+graph {
+  // Vertices =  6
+  // Edges =  4
+  // Max Degree = 3
+  1
+  3  3 -- 4  3 -- 5
+  4  4 -- 5  4 -- 6
+  5
+  6
+  10
+}
+
+Testing sets for dominance
+Finding a MIN dominating set
+Number of elements = 4
+{ 0, 3, 7, 9 }
+Finding a MIN WEIGHT dominating set
+Number of elements = 5
+{ 1, 2, 4, 7, 9 }
+==50184== 
+==50184== HEAP SUMMARY:
+==50184==     in use at exit: 0 bytes in 0 blocks
+==50184==   total heap usage: 31,495 allocs, 31,495 frees, 467,166 bytes allocated
+==50184== 
+==50184== All heap blocks were freed -- no leaks are possible
+==50184== 
+==50184== For lists of detected and suppressed errors, rerun with: -s
+==50184== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

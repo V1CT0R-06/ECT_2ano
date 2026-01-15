@@ -1,0 +1,30 @@
+*** simple_graph.DOT ***
+
+The full set is a dominating set? 1
+
+Number of elements = 2
+{ 2, 5 }
+The test set is a dominating set? 1
+
+Number of elements = 3
+{ 0, 4, 7 }
+The test set is a dominating set? 1
+
+Number of elements = 2
+{ 0, 7 }
+The test set is a dominating set? 0
+
+*** SWtinyG.txt ***
+
+Number of elements = 4
+{ 0, 3, 7, 9 }
+The test set is a dominating set? 1
+
+Number of elements = 7
+{ 0, 2, 4, 6, 8, 10, 12 }
+The test set is a dominating set? 1
+
+Number of elements = 6
+{ 1, 3, 5, 7, 9, 11 }
+The test set is a dominating set? 0
+

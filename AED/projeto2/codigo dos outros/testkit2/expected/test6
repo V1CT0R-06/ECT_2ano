@@ -1,0 +1,15 @@
+*** simple_graph.DOT ***
+Finding a MIN WEIGHT dominating set
+Number of elements = 2
+{ 0, 5 }
+
+*** simple_weighted_graph.DOT ***
+Finding a MIN WEIGHT dominating set
+Number of elements = 2
+{ 4, 12 }
+
+*** SWtinyG.txt ***
+Finding a MIN WEIGHTdominating set
+Number of elements = 5
+{ 1, 2, 4, 7, 9 }
+

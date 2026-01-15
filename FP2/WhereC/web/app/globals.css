@@ -1,0 +1,143 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --ink: #0f1d2d;
+  --muted: #5b6a7c;
+  --blue: #1f4b99;
+  --orange: #f07a2f;
+  --border: #e2e7f0;
+  --shadow: rgba(15, 29, 45, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg: #0d141f;
+  --surface: #141c28;
+  --ink: #f5f7fb;
+  --muted: #a0aec0;
+  --blue: #3b7cff;
+  --orange: #ff9c5b;
+  --border: #263245;
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.map-canvas {
+  height: 520px;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .map-canvas {
+    height: 420px;
+  }
+}
+
+.bathroom-marker {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+  background: var(--surface);
+  box-shadow: 0 6px 12px var(--shadow);
+}
+
+.request-marker {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 50%;
+  border: 2px solid var(--orange);
+  background: var(--surface);
+  box-shadow: 0 6px 12px var(--shadow);
+}
+
+.marker-emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.ghost,
+.primary {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ghost {
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  background: transparent;
+}
+
+.primary {
+  background: var(--blue);
+  color: white;
+}
+
+.theme-toggle {
+  position: relative;
+  width: 52px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.theme-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.theme-track {
+  width: 100%;
+  height: 100%;
+  background: var(--border);
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.theme-track::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+.theme-toggle input:checked + .theme-track {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.theme-toggle input:checked + .theme-track::after {
+  transform: translateX(22px);
+}
