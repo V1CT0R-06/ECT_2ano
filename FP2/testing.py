@@ -16,7 +16,7 @@ def replacevowels(s):
     return s
 
 print (replacevowels("Hello World!"))  # Output: H_ll_ W_rld!
-print (replacevowels("aabbaa"))  
+print (replacevowels("aabbaa"))
 
 
 def squarecolorchess(pos):
@@ -58,6 +58,7 @@ def removechars(s, chars):
 print (removechars("Hello World!", "lo"))  # Output: He Wr d!
 
 # -------------- day 2 ----------------
+print("-------------- day 2 ----------------")
 
 stocks = [
     ('INTC','London',34.25,34.45,1792860),
@@ -120,6 +121,8 @@ def positiveStocks(stocks):
 print(positiveStocks(stocks))
 
 # -------------- day 3 ----------------
+print("-------------- day 3 ----------------")
+
 
 def formatPrice(p):
     return f"{p:7.2f}"
@@ -179,6 +182,8 @@ def printStocksSorted(stocks):
 printStocksSorted(stocks)
 
 # -------------- day 4 ----------------
+print("-------------- day 4 ----------------")
+
 
 def sortByVolume(stocks):
     return sorted(stocks, key=lambda s: s[4])
@@ -193,6 +198,8 @@ for s in sortByVolumeDesc(stocks):
     print(s[0], s[4])
 
 # -------------- day 5 ----------------
+print("-------------- day 5 ----------------")
+
 
 def filterByCity(stocks, city):
     result = []
@@ -246,6 +253,7 @@ def printPositiveTable(stocks):
 printPositiveTable(stocks)
 
 # -------------- day 6 ----------------
+print("-------------- day 6 ----------------")
 
 filename = "stocks.txt"
 def loadStocks(filename):
@@ -327,6 +335,7 @@ print(loadStocksSafe(filename))
 
 
 # -------------- day 7 ----------------
+print("-------------- day 7 ----------------")
 
 
 def longestPrefixRepeated(s):
@@ -396,7 +405,7 @@ def loadStocksSafe(filename):
 
             result.append((name, city, close_price, open_price, volume))
     return result
-            
+
 stocks = loadStocksSafe("stocks.txt")
 
 def filterPositive(stocks):
@@ -491,7 +500,7 @@ printStudentsTable(ordered)
 
 
 # -------------- day 10 ----------------
-print("-------------- day 10 ----------------")
+print("-------------- day 10 ---------------")
 
 teams = ["FCP", "SLB", "SCP"]
 
@@ -616,3 +625,186 @@ def printCommonInterests(common):
 
 print("___Alphabetical order:___")
 printCommonInterests(common)
+
+# -------------- day 13 ----------------
+print("-------------- day 13 ----------------")
+
+words = ["ana", "joao", "ana", "maria", "joao", "ana"]
+
+def nameToDict(words):
+	d = {}
+	for name in words:
+		if name in d:
+			d[name] += 1
+		else:
+			d[name] = 1
+	return d
+print(nameToDict(words))
+
+grades = {"Ana": 14, "Buno": 8, "Carla": 10, "Diogo": 9, "Eva": 17}
+
+def alunosAcimaDez(grades):
+	d  = {}
+	for name in grades:
+		if grades[name] >= 10:
+			d[name] = grades[name]
+	return d
+
+print(alunosAcimaDez(grades))
+
+
+def bestStudent(grades):
+	best_name = None
+	best_grade = -1
+
+	for name in grades:
+		if grades[name] > best_grade:
+			best_grade = grades[name]
+			best_name = name
+	return best_name
+print(bestStudent(grades))
+
+def averageGrade(grades):
+	total = 0
+	count = 0
+
+	for name in grades:
+		total = total + grades[name]
+		count = count + 1
+	return total / count
+print(averageGrade(grades))
+
+# -------------- day 14 ----------------
+print("-------------- day 14 ----------------")
+
+def countPositive(grades):
+	count = 0
+
+	for name in grades:
+		if grades[name] >= 10:
+			count += 1
+
+	return count
+print(countPositive(grades))
+
+def filterPositive(grades):
+	result = {}
+
+	for name in grades:
+		if grades[name] >= 10:
+			result[name] = grades[name]
+	return result
+print(filterPositive(grades))
+
+def bestStudent(grades):
+	best_name = None
+	best_grade = 0
+	for name in grades:
+		if grades[name] > best_grade:
+			best_grade = grades[name]
+			best_name = name
+	return best_name
+print(bestStudent(grades))
+
+def dictToList(grades):
+	lst = []
+	for name in grades:
+		lst.append((name, grades[name]))
+	return lst
+
+def gradeValue(item):
+	return item[1]
+
+def printSorted(grades):
+	lst = dictToList(grades)
+	ordered = sorted(lst, key=gradeValue, reverse=True)
+	
+	for name, grade in ordered:
+		print(name, grade)
+printSorted(grades)
+
+def testSomething():
+	d = {}
+	for x in ["a", "b", "c", "c", "a", "a"]:
+		if x in d:
+			d[x] += 1
+		else:
+			d[x] = 1
+	return d
+
+print(testSomething())
+
+def SomethingElseOrdered():
+	d = testSomething()
+
+	lst = []
+	for k in d:
+		lst.append((k, d[k]))
+
+	ordered = sorted(lst, key=lambda item: item[1], reverse=True)
+
+	for letter, count in ordered:
+		print(letter, count)
+SomethingElseOrdered()
+
+
+# -------------- day 15 ----------------
+print("-------------- day 15 ----------------")
+
+letters = ["n", "i", "g", "g", "a"]
+
+def lettersDict(letters):
+	nigga = {}
+	for letter in letters:
+		if letter in nigga:
+			nigga[letter] += 1
+		else:
+			nigga[letter] = 1
+	return nigga
+
+nigga = lettersDict(letters)
+
+def orderDict():
+	nigga = lettersDict(letters)
+	lst = []
+	for letter in nigga:
+		lst.append((letter, nigga[letter]))
+
+	ordered = sorted(lst, key=lambda item: item[1], reverse=True)
+
+	for letter, count in ordered:
+		print(letter, count)
+orderDict()
+
+
+d = {'abc' : 123, 'xyz' : 456, 'klm' : 789}
+x = 'klm'
+if x in d:
+    print(x, '-', d[x], sep='')
+else:
+    print('Something')
+
+d['olx'] = 999
+
+l1 = list(d.keys())
+x = 'x'
+for k in l1:
+    if x in k:
+        print(k, '-', d[k], sep='', end=',')
+print()
+
+#procura de um numero no dicionário (valor)
+l2 = list(d.values())
+x = 123
+for i in range(len(l2)):
+    if x == l2[i]:
+        print(l1[i], '-', x, sep='', end=',')
+print()
+
+def toStr(num):
+    assert num >= 0
+    digits = "0123456789"
+    if num < 10:
+        return digits[num]
+    return toStr(num//10) + digits[num%10]
+print(toStr(67))
