@@ -11,7 +11,7 @@ AED teste try:
 10.a
 11.d
 12.c
-13.a
+13.c
 14.a
 15.d
 16.a
@@ -40,3 +40,141 @@ AED teste try:
 18.V
 19.V
 20.V
+
+
+---------------------------------------------------------------------------------------
+
+
+## LINKED LISTS
+Base:
+	typedef struct node {
+	    int value;
+	    struct node* next;
+	} Node;
+
+Criar No:
+	Node* newNode(int x) {
+	    Node* n = (Node*)malloc(sizeof(Node));
+	    if (n == NULL) return NULL;
+	    n->value = x;
+	    n->next = NULL;
+	    return n;
+	}
+
+Inserir Inicio:
+	new->next = head;
+	head = new;
+	
+Inserir Fim:
+	Node* pushBack(Node* head, int x) {
+	    Node* n = newNode(x);
+	    if (n == NULL) return head;
+
+	    if (head == NULL) return n;
+
+	    Node* cur = head;
+	    while (cur->next != NULL) cur = cur->next;
+	    cur->next = n;
+	    return head;
+	}
+
+Detetar Lista Vazia:
+	if (head == NULL)
+	
+Detetar Tamanho da Lista:
+	unsigned int length(Node* head) {
+	    unsigned int c = 0;
+	    Node* cur = head;
+	    while (cur != NULL) {
+		c++;
+		cur = cur->next;
+	    }
+	    return c;
+	}
+
+Procurar valor:
+	int contains(Node* head, int x) {
+	    Node* cur = head;
+	    while (cur != NULL) {
+		if (cur->value == x) return 1;
+		cur = cur->next;
+	    }
+	    return 0;
+	}
+
+Merge 2 Listas:
+	Node* mergeSorted(Node* a, Node* b) {
+	    Node dummy;
+	    dummy.next = NULL;
+	    Node* tail = &dummy;
+
+	    while (a != NULL && b != NULL) {
+		if (a->value <= b->value) {
+		    tail->next = a;
+		    a = a->next;
+		} else {
+		    tail->next = b;
+		    b = b->next;
+		}
+		tail = tail->next;
+	    }
+
+	    tail->next = (a != NULL) ? a : b;
+	    return dummy.next;
+	}
+
+## BINARY SEARCH TREE (BST)
+Base:
+	typedef struct node {
+	    int value;
+	    struct node* left;
+	    struct node* right;
+	} Node;
+
+Contas Nos:
+	unsigned int size(Node* root) {
+	    if (root == NULL) return 0;
+	    return 1 + size(root->left) + size(root->right);
+	}
+
+Altura Arvore:
+	int height(Node* root) {
+	    if (root == NULL) return -1;
+
+	    int l = height(root->left);
+	    int r = height(root->right);
+
+	    return 1 + (l > r ? l : r);
+	}
+
+Contar Folhas:
+	unsigned int leaves(Node* root) {
+	    if (root == NULL) return 0;
+	    if (root->left == NULL && root->right == NULL)
+		return 1;
+	    return leaves(root->left) + leaves(root->right);
+	}
+
+Inorder (BST -> esquerda - raiz - direita):
+	void inorder(Node* root) {
+	    if (root == NULL) return;
+	    inorder(root->left);
+	    printf("%d ", root->value);
+	    inorder(root->right);
+	}
+
+Maior Valor BST:
+	int maxValue(Node* root) {
+	    if (root == NULL) return -1; // ou assumir que nunca é NULL
+
+	    Node* cur = root;
+	    while (cur->right != NULL)
+		cur = cur->right;
+
+	    return cur->value;
+	}
+
+## HANOI
+Movimentos:
+	T(n) = 2T(n-1) + 1
+	=> 2^n - 1
