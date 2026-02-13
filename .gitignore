@@ -20,7 +20,7 @@
 *.rar
 *.tar
 *.zip
-*.image
+*.M2.image
 
 # Logs and databases #
 ######################
